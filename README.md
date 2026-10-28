@@ -1,5 +1,10 @@
 # Cozmo AMOLED
 
+[![Instagram](https://img.shields.io/badge/Instagram-%40mrfab.dev-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/mrfab.dev)
+[![Site](https://img.shields.io/badge/site-mrfab.dev-111111?logo=googlechrome&logoColor=white)](https://mrfab.dev/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
+[![Placa no AliExpress](https://img.shields.io/badge/placa-AliExpress-FF4747?logo=aliexpress&logoColor=white)](https://s.click.aliexpress.com/e/_mLGdUUP)
+
 O rosto animado do [Cozmo ESP32](https://github.com/fabriciowth/cozmo-esp32) numa telinha redonda AMOLED,
 agora **conversando por voz em português**, com wake word, hora, clima, controle de volume e reações
 quando você chacoalha ou faz carinho nele.
@@ -31,7 +36,7 @@ O app **AIChats** de fábrica (XiaoZhi) também ganhou o rosto do Cozmo no lugar
 
 ## Material
 
-- Waveshare ESP32-S3-Touch-AMOLED-1.75:
+- [Waveshare ESP32-S3-Touch-AMOLED-1.75](https://s.click.aliexpress.com/e/_mLGdUUP) (AliExpress):
   - tela AMOLED 466×466 com toque;
   - 2 microfones e alto-falante;
   - acelerômetro QMI8658;
