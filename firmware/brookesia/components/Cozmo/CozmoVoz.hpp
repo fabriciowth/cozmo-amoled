@@ -1,6 +1,6 @@
 // Voz do app Cozmo: dorme ouvindo só a wake word ("hey cozmo", "acorda cozmo", em MultiNet na placa);
 // acordado, conversa pelo Deepgram Voice Agent (Flux ouve, gpt-4o-mini pensa, OpenAI tts-1 fala),
-// igual ao celular do cozmo_ype. Depois de um tempo em silêncio, desliga a conexão e volta a dormir.
+// igual ao celular do cozmo-esp32. Depois de um tempo em silêncio, desliga a conexão e volta a dormir.
 #pragma once
 
 #include <atomic>

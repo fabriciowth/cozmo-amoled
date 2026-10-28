@@ -1,4 +1,4 @@
-// Rosto do Cozmo do cozmo_ype (~/Documents/Arduino/cozmo_ype): olhos, boca e tontura ao chacoalhar.
+// Rosto do Cozmo do cozmo-esp32 (github.com/fabriciowth/cozmo-esp32): olhos, boca e tontura ao chacoalhar.
 // Usado pelo app Cozmo e pelo AIChats. Tudo roda num lv_timer, então só chame com a LVGL travada.
 #pragma once
 

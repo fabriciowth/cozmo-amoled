@@ -190,7 +190,7 @@ void CozmoFace::olho(int i, float cx, float h, float dy)
     lv_line_set_points(_palpebra[i], _pontos[i], 2);
 }
 
-// Boca do cozmo_ype: retângulo arredondado recortado por outro preto deslocado = sorriso ou boca virada.
+// Boca do cozmo-esp32: retângulo arredondado recortado por outro preto deslocado = sorriso ou boca virada.
 void CozmoFace::boca(float dx, float dy, float fala)
 {
     float w = _atual[MW] * _esc, h = _atual[MH] * _esc, c = _atual[MC] * _esc;

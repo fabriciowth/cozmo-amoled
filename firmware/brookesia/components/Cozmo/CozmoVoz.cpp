@@ -45,7 +45,7 @@ const char CARINHO[] = R"J({"type":"InjectUserMessage","content":"[evento, nao e
                        R"J(set_expression.]"})J";
 const char *HUMORES[] = {"neutro", "feliz", "triste", "bravo", "sono", "curioso", "surpreso", "pensando"};
 
-// Mesmo agente do cozmo_ype: Flux ouve, gpt-4o-mini pensa e a voz "echo" da OpenAI fala (o Aura não fala português).
+// Mesmo agente do cozmo-esp32: Flux ouve, gpt-4o-mini pensa e a voz "echo" da OpenAI fala (o Aura não fala português).
 const char SETTINGS[] = R"({"type":"Settings",
  "audio":{"input":{"encoding":"linear16","sample_rate":16000},
           "output":{"encoding":"linear16","sample_rate":24000,"container":"none"}},

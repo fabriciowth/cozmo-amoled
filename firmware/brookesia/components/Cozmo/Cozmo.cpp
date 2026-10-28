@@ -1,4 +1,4 @@
-// App "Cozmo": o rosto do cozmo_ype (CozmoFace) em tela cheia que conversa (CozmoVoz). Dorme até ouvir
+// App "Cozmo": o rosto do cozmo-esp32 (CozmoFace) em tela cheia que conversa (CozmoVoz). Dorme até ouvir
 // "Hey Cozmo" ou levar um toque; tocar enquanto ele fala faz ele parar. Molde do app Crosshair.
 #include <cstring>
 #include <memory>
