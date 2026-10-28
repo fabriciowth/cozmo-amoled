@@ -45,7 +45,7 @@ O app **AIChats** de fábrica (XiaoZhi) também ganhou o rosto do Cozmo no lugar
 - Bateria LiPo 3,7 V, opcional.
 - Chaves de API:
   - [Deepgram](https://console.deepgram.com) para o Voice Agent;
-  - [OpenAI](https://platform.openai.com) para o cérebro e a voz.
+  - [OpenAI](https://platform.openai.com) para a voz. O cérebro (`gpt-4o-mini`) roda pelo Deepgram, dentro do Voice Agent.
 
 ## Como compilar e gravar
 
@@ -154,7 +154,7 @@ Para quem for mexer, estas custaram tempo:
 
 ## Custos
 
-Acordado, cada minuto de conversa consome Deepgram (Voice Agent) e OpenAI (`gpt-4o-mini` e `tts-1`).
+Acordado, cada minuto de conversa consome o Deepgram (Voice Agent, que já inclui o `gpt-4o-mini`) e a voz da OpenAI (`tts-1`).
 Dormindo, a conexão fica fechada e não há custo.
 
 ## Créditos e licença
