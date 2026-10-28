@@ -38,10 +38,10 @@ namespace esp_brookesia::apps
     static void time_sync_notification_cb(struct timeval *tv)
     {
         (void)tv;
-        setenv("TZ", "CST-8", 1);
+        setenv("TZ", "<-03>3", 1);  // Brasília (a fábrica vinha com o fuso da China, CST-8)
         tzset();
         s_time_synced = true;
-        ESP_UTILS_LOGI("SNTP time synced, timezone CST-8 applied");
+        ESP_UTILS_LOGI("SNTP time synced, timezone <-03>3 applied");
     }
 
     static void start_time_sync_once()

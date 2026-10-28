@@ -13,6 +13,8 @@
 
 namespace esp_brookesia::apps {
 
+class CozmoFace;
+
 class XiaozhiUi {
 public:
     using ActionCallback = void (*)(void *context);
@@ -37,6 +39,7 @@ public:
     void setChatMessage(const char *role, const char *text);
     void clearChatMessages();
     void setEmotion(const char *emotion);
+    void setSpeaking(bool speaking);
     void setActivation(const char *code, const char *message, bool visible);
 
     lv_obj_t *root() const
@@ -56,6 +59,7 @@ private:
     lv_obj_t *_status_label = nullptr;
     lv_obj_t *_emoji_box = nullptr;
     lv_obj_t *_emoji_label = nullptr;
+    CozmoFace *_rosto = nullptr;
     lv_obj_t *_activation_box = nullptr;
     lv_obj_t *_activation_code_label = nullptr;
     lv_obj_t *_activation_message_label = nullptr;

@@ -6,6 +6,8 @@
 
 #include "XiaozhiUi.hpp"
 
+#include "CozmoFace.hpp"
+
 #include "esp_lv_adapter.h"
 
 #include <stdio.h>
@@ -164,16 +166,16 @@ bool XiaozhiUi::create(
     prepareTransparentObject(_root);
     lv_obj_set_size(_root, lv_pct(100), lv_pct(100));
     lv_obj_align(_root, LV_ALIGN_CENTER, 0, 0);
-    lv_obj_set_style_bg_color(_root, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(_root, lv_color_hex(0x000000), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(_root, LV_OPA_COVER, LV_PART_MAIN);
-    lv_obj_set_style_text_color(_root, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_text_color(_root, lv_color_hex(0xE2E8F0), LV_PART_MAIN);
     lv_obj_set_style_text_font(_root, _text_font, LV_PART_MAIN);
 
     _top_bar = lv_obj_create(_root);
     prepareTransparentObject(_top_bar);
     lv_obj_set_size(_top_bar, lv_pct(100), top_bar_height);
     lv_obj_align(_top_bar, LV_ALIGN_TOP_MID, 0, 0);
-    lv_obj_set_style_bg_color(_top_bar, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(_top_bar, lv_color_hex(0x000000), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(_top_bar, LV_OPA_50, LV_PART_MAIN);
 
     _network_label = lv_label_create(_top_bar);
@@ -193,14 +195,14 @@ bool XiaozhiUi::create(
     lv_obj_set_style_text_font(_status_label, _text_font, LV_PART_MAIN);
     lv_obj_align(_status_label, LV_ALIGN_CENTER, 0, 0);
 
+    // Rosto do Cozmo no lugar do emoji, entre a barra de cima e a legenda.
     _emoji_box = lv_obj_create(_root);
     prepareTransparentObject(_emoji_box);
-    lv_obj_set_size(_emoji_box, compact_round ? 88 : 96, compact_round ? 88 : 96);
-    lv_obj_align(_emoji_box, LV_ALIGN_CENTER, 0, compact_round ? -4 : -18);
-
-    _emoji_label = lv_label_create(_emoji_box);
-    lv_obj_set_style_text_color(_emoji_label, lv_color_hex(0x000000), LV_PART_MAIN);
-    lv_obj_center(_emoji_label);
+    lv_obj_remove_flag(_emoji_box, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_set_size(_emoji_box, parent_width, parent_height);
+    lv_obj_align(_emoji_box, LV_ALIGN_CENTER, 0, 0);
+    _rosto = new CozmoFace();
+    _rosto->create(_emoji_box, parent_width / 2, parent_height * 2 / 5, compact_round ? 2.6f : 2.2f);
 
     _activation_box = lv_obj_create(_root);
     prepareTransparentObject(_activation_box);
@@ -233,7 +235,7 @@ bool XiaozhiUi::create(
     lv_obj_set_style_text_font(_activation_message_label, _text_font, LV_PART_MAIN);
     lv_obj_set_style_text_color(
         _activation_message_label,
-        lv_color_hex(0x5A5A5A),
+        lv_color_hex(0x94A3B8),
         LV_PART_MAIN
     );
 
@@ -250,7 +252,7 @@ bool XiaozhiUi::create(
         0,
         compact_round ? -60 : 0
     );
-    lv_obj_set_style_bg_color(_subtitle_bar, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(_subtitle_bar, lv_color_hex(0x1E293B), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(_subtitle_bar, LV_OPA_70, LV_PART_MAIN);
     lv_obj_set_style_pad_hor(_subtitle_bar, compact_round ? 12 : 16, LV_PART_MAIN);
     lv_obj_set_style_radius(_subtitle_bar, compact_round ? 20 : 0, LV_PART_MAIN);
@@ -283,6 +285,8 @@ void XiaozhiUi::destroy()
 
 void XiaozhiUi::destroyView()
 {
+    delete _rosto;  // para o timer antes de apagar os objetos
+    _rosto = nullptr;
     if (_root) {
         lv_obj_delete(_root);
     }
@@ -319,7 +323,7 @@ void XiaozhiUi::setNetworkReady(bool ready)
     );
     lv_obj_set_style_text_color(
         _network_label,
-        lv_color_hex(ready ? 0x202020 : 0x8A8A8A),
+        lv_color_hex(ready ? 0x22D3EE : 0x64748B),
         LV_PART_MAIN
     );
     _network_ready = ready;
@@ -350,27 +354,16 @@ void XiaozhiUi::clearChatMessages()
 
 void XiaozhiUi::setEmotion(const char *emotion)
 {
-    if (!_emoji_label) {
-        return;
+    if (_rosto) {
+        _rosto->setEmocao(emotion);
     }
+}
 
-    const char *name = emotion && emotion[0] ? emotion : "neutral";
-    if (strcmp(_emotion_name, name) == 0) {
-        return;
+void XiaozhiUi::setSpeaking(bool speaking)
+{
+    if (_rosto) {
+        _rosto->setFalando(speaking);
     }
-
-    const char *emoji = emojiForEmotion(name);
-    if (_emoji_font && emoji) {
-        lv_obj_set_style_text_font(_emoji_label, _emoji_font, LV_PART_MAIN);
-        lv_label_set_text(_emoji_label, emoji);
-        snprintf(_emotion_name, sizeof(_emotion_name), "%s", name);
-        return;
-    }
-
-    const char *icon = font_awesome_get_utf8(name);
-    lv_obj_set_style_text_font(_emoji_label, &font_awesome_30_4, LV_PART_MAIN);
-    lv_label_set_text(_emoji_label, icon ? icon : FONT_AWESOME_MICROCHIP_AI);
-    snprintf(_emotion_name, sizeof(_emotion_name), "%s", name);
 }
 
 void XiaozhiUi::setActivation(const char *code, const char *message, bool visible)

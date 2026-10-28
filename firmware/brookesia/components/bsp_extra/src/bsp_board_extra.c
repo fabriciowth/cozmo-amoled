@@ -73,6 +73,8 @@ const char *bsp_extra_audio_owner_name(bsp_extra_audio_owner_t owner)
         return "SpecAnalyzer";
     case BSP_EXTRA_AUDIO_OWNER_XIAOZHI:
         return "Xiaozhi";
+    case BSP_EXTRA_AUDIO_OWNER_COZMO:
+        return "Cozmo";
     case BSP_EXTRA_AUDIO_OWNER_MAX:
     default:
         return "Invalid";

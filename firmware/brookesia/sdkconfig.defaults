@@ -103,3 +103,10 @@ CONFIG_FATFS_MAX_LFN=255
 CONFIG_FATFS_CODEPAGE_936=y
 CONFIG_FATFS_API_ENCODING_UTF_8=y
 CONFIG_FATFS_FS_LOCK=16
+
+# Cozmo: wake word "Hey Cozmo" em MultiNet
+CONFIG_SR_MN_EN_MULTINET7_QUANT=y
+# Cozmo: TLS na PSRAM (a RAM interna nao aguenta verificar o RSA 4096 do Deepgram)
+CONFIG_MBEDTLS_EXTERNAL_MEM_ALLOC=y
+# Cozmo: mandar audio sem esperar o ws terminar de receber
+CONFIG_ESP_WS_CLIENT_SEPARATE_TX_LOCK=y

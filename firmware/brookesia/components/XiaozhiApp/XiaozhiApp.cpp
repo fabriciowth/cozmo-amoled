@@ -582,7 +582,7 @@ void XiaozhiApp::createUi()
 
     lv_obj_t *screen = lv_screen_active();
     lv_obj_clean(screen);
-    lv_obj_set_style_bg_color(screen, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(screen, lv_color_hex(0x000000), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(screen, LV_OPA_COVER, LV_PART_MAIN);
     lv_obj_clear_flag(screen, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -590,7 +590,7 @@ void XiaozhiApp::createUi()
     lv_obj_remove_style_all(_page_root);
     lv_obj_set_size(_page_root, lv_pct(100), lv_pct(100));
     lv_obj_center(_page_root);
-    lv_obj_set_style_bg_color(_page_root, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(_page_root, lv_color_hex(0x000000), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(_page_root, LV_OPA_COVER, LV_PART_MAIN);
     lv_obj_clear_flag(_page_root, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -644,7 +644,8 @@ void XiaozhiApp::refreshUi()
     _ui->setNetworkReady(_network_ready.load());
     _ui->setStatus(stateText(state));
     _ui->setChatMessage(role, text);
-    _ui->setEmotion(emotion[0] ? emotion : "neutral");
+    _ui->setEmotion(state == State::Processing ? "thinking" : emotion[0] ? emotion : "neutral");
+    _ui->setSpeaking(state == State::Speaking);
     _ui->setActivation(
         code,
         message[0] ? message : xiaozhiUiText(

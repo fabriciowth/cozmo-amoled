@@ -7,6 +7,7 @@ idf_component_register(
         brookesia_app_calculator
         bsp_extra
         ButtonTest
+        Cozmo
         Crosshair
         draw
         espressif__esp_lvgl_adapter
